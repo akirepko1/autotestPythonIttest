@@ -1,5 +1,5 @@
 import math
-from .locators import BasePageLocators
+from locators.locators import BasePageLocators
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
