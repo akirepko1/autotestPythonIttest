@@ -7,9 +7,10 @@ from webdriver_manager.microsoft import IEDriverManager
 from datetime import datetime
 
 from helpers.settings import SCREEN_ERROR_PATH
+from pages.base_page import ConsoleLog
 
 pytest.fixture
-def driver(request, browser, bot):
+def driver(request, browser):
     if browser == 'firefox':
         options = webdriver.FirefoxOptions()
         options.headless = True
