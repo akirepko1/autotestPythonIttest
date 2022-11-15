@@ -1,4 +1,6 @@
 import math
+import html
+import traceback
 from locators.locators import BasePageLocators
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -66,6 +68,17 @@ class BasePage:
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+class ConsoleLog(BasePage):
+
+    def get_console_log(self, locator):
+        element = self.driver.find_elements(locator.by, locator.path)
+        if len(element) > 0:
+            for i in element:
+                try:
+                    raise Exception(html.unescape(i.get_attribute('innerHTML')))
+                except Exception:
+                    traceback.print_exc()
 
 
 
