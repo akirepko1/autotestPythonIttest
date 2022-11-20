@@ -9,7 +9,40 @@ from datetime import datetime
 from helpers.settings import SCREEN_ERROR_PATH
 from pages.base_page import ConsoleLog
 
-pytest.fixture
+
+@pytest.fixture
+def success(request):
+    return request.config.getoption("--success")
+
+
+@pytest.fixture
+def browser(request):
+    return request.config.getoption("--browser")
+
+
+@pytest.fixture(scope="session")
+def url(request):
+    url = request.config.getoption("--url")
+    return url
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default='chrome', help="Browser used")
+    parser.addoption("--url", action="store", default='https://www.alfastrah.ru/', help="base URL")
+    parser.addoption("--bot", action="store", default='no', help="Send error via TG-bot. Use yes/no")
+    parser.addoption("--success", action="store", default='no', help="Go to success-page. Use yes/no")
+
+
+@pytest.mark.tryfirst
+def pytest_runtest_makereport(item, call, __multicall__):
+    """ This method use for accessing test execution info (failed, passed, skipped, etc)
+    Uses for pytest fixtures """
+    rep = __multicall__.execute()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
+
+
+@pytest.fixture
 def driver(request, browser):
     if browser == 'firefox':
         options = webdriver.FirefoxOptions()
