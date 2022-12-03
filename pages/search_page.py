@@ -17,6 +17,11 @@ class SearchPage(BasePage):
         self.switch_window()
         self.wait_for_visibility_element(self.locator.icon_ittest())
 
+    def negative_search(self):
+        self.set_text_input(self.locator.search_string(), value="IT Test",
+                            message="Ввели в поиск IT Test")
+        self.button_click(self.locator.search_results())
+
 
 
 

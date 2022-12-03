@@ -14,5 +14,5 @@ def test_search_ittest(driver):
 def test_negative_search_ittest(driver):
     page = SearchPage(driver)
     page.open_page(url, url_path)
-    page.search()
-    page.search_check()
+    page.negative_search()
+

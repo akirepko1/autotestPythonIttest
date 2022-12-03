@@ -1,4 +1,7 @@
+import os
 import pathlib
+
+import allure
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -39,11 +42,9 @@ def driver(request, browser):
         options.add_argument('window-size=1920x6500')
         options.add_argument('disable-search-geolocation-disclosure')
         options.add_argument('--disable-notifications')
-        # options.add_argument('--enable-logging=stderr --log-level=0')
         wd = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-    # wd.implicitly_wait(IMPLICITLY_WAIT)
-    # wd.set_page_load_timeout(PAGE_TIMEOUT)
+
     wd.maximize_window()
 
     print(f'\n\nЗапускаем тест {request.node.name}\n')
