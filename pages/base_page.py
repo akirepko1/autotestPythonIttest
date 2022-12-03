@@ -1,5 +1,7 @@
 import html
 import traceback
+from urllib import parse
+
 import validators
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
 from selenium.webdriver import ActionChains
@@ -35,6 +37,9 @@ class BasePage:
 
     def refresh_page(self):
         self.driver.refresh()
+    def switch_window(self):
+        window_after = self.driver.window_handles[1]
+        self.driver.switch_to.window(window_after)
 
     def wait_for_visibility_element(self, locator, time=LONG_WAIT):
         try:
@@ -329,6 +334,7 @@ class BasePage:
             pass
 
 
+
 class ConsoleLog(BasePage):
 
     def get_console_log(self, locator):
@@ -339,6 +345,11 @@ class ConsoleLog(BasePage):
                     raise Exception(html.unescape(i.get_attribute('innerHTML')))
                 except Exception:
                     traceback.print_exc()
+
+        def beautify_url(base_url, path):
+            url_parts = list(parse.urlparse(base_url))
+            url_parts[2] = path
+            return parse.urlunparse(url_parts)
 
 
 

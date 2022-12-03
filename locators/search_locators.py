@@ -14,6 +14,10 @@ class SearchPageLocators:
 
     @staticmethod
     def search_results():
-        return Locator(By.CLASS_NAME, "LC20lb MBeuO DKV0Md")
+        return Locator(By.PARTIAL_LINK_TEXT, "IT Test - complex industry IT solutions for business")
+
+    @staticmethod
+    def icon_ittest():
+        return Locator(By.CLASS_NAME, "partial-logo")
 
 

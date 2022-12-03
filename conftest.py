@@ -34,7 +34,7 @@ def driver(request, browser):
         wd = webdriver.Ie(IEDriverManager(os_type='Win32', version='3.1.0').install())
     else:
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         options.add_argument("--no-sandbox")
         options.add_argument('window-size=1920x6500')
         options.add_argument('disable-search-geolocation-disclosure')

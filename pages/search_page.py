@@ -8,10 +8,15 @@ class SearchPage(BasePage):
         self.locator = SearchPageLocators()
 
     def search(self):
-        self.wait_for_invisibility_element(self.locator.search_string())
         self.set_text_input(self.locator.search_string(), value="IT Test",
                             message="Ввели в поиск IT Test")
         self.button_click(self.locator.search_button())
     def search_check(self):
-        self.wait_for_invisibility_element(self.locator.search_results())
-        self.wait_for_invisibility_element(self.locator.search_results())
+
+        self.button_click(self.locator.search_results())
+        self.switch_window()
+        self.wait_for_visibility_element(self.locator.icon_ittest())
+
+
+
+
